@@ -9,6 +9,21 @@ app.disable("x-powered-by");
 var fs = require("fs");
 var path = require("path");
 
+const bcrypt = require('bcrypt');
+
+bcrypt.hash('passw0rd!', 13, (err, hash) => {
+  console.log(hash);
+  bcrypt.compare('passw0rd!', hash, (err, res) => {
+    console.log(res); //true
+  });
+});
+
+var hash = bcrypt.hashSync('passw0rd!', 13);
+console.log(hash);
+
+var result = bcrypt.compareSync('passw0rd!', hash);
+console.log(result);
+
 app.use(function (req, res, next) {
   res.set({
     "Access-Control-Allow-Origin": "*",
