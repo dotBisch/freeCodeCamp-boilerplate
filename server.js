@@ -12,17 +12,29 @@ var path = require("path");
 const bcrypt = require('bcrypt');
 
 bcrypt.hash('passw0rd!', 13, (err, hash) => {
+  if (err) {
+    console.error('Hashing error:', err);
+    return;
+  }
   console.log(hash);
   bcrypt.compare('passw0rd!', hash, (err, res) => {
+    if (err) {
+      console.error('Compare error:', err);
+      return;
+    }
     console.log(res); //true
   });
 });
 
-var hash = bcrypt.hashSync('passw0rd!', 13);
-console.log(hash);
-
-var result = bcrypt.compareSync('passw0rd!', hash);
-console.log(result);
+try {
+  var hash = bcrypt.hashSync('passw0rd!', 13);
+  console.log(hash);
+  
+  var result = bcrypt.compareSync('passw0rd!', hash);
+  console.log(result);
+} catch (error) {
+  console.error('Sync bcrypt error:', error);
+}
 
 app.use(function (req, res, next) {
   res.set({
