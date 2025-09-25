@@ -9,7 +9,7 @@ app.disable("x-powered-by");
 var fs = require("fs");
 var path = require("path");
 
-const bcrypt = require('bcrypt');
+var bcrypt = require('bcrypt');
 
 bcrypt.hash('passw0rd!', 13, (err, hash) => {
   if (err) {
